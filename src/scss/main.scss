@@ -98,9 +98,13 @@
       display:block;
     }
   }
+  .group_btn_pc{
+    display:flex;
+    margin-left:10px;
+  }
 }
-.mode_edit{
-  align-items:stretch;
+.group_btn_m{
+  display:none;
 }
 .txt_info{
   flex:1;
@@ -131,11 +135,11 @@
         }
       }
     }
-    .lab_check{
-      display:flex;align-items:center;margin:-10px 0;padding:18px 10px;user-select:none;cursor:pointer;
-      .ico_check{
-        font-size:26px;
-      }
+  }
+  .lab_check{
+    display:flex;align-items:center;margin:-10px 0;padding:18px 10px;user-select:none;cursor:pointer;
+    .ico_check{
+      font-size:26px;
     }
   }
   &.item_done{
@@ -280,5 +284,43 @@ only screen and (max-width:768px){
   }
   .info_setting{
     margin-top:15px;
+  }
+  .txt_info{
+    .txt_date{
+      display:none;
+    }
+  }
+  [class*=mode_]{
+    .btn{
+      padding:8px 16px 6px;
+    }
+    .txt_todo{
+      padding:7px 0;
+    }
+    .group_btn_pc{
+      display:none;
+    }
+  }
+  .mode_edit{
+    .form_ctrl{
+      padding:6px 10px;
+    }
+  }
+  .group_check{
+    .lab_check{
+      margin:-13px 0 -13px;
+      padding:15px 10px 15px;
+    }
+  }
+  .group_btn_m{
+    display:flex;
+    margin-left:6px;
+    button{
+      padding:4px;
+      font-size:26px;
+      & + button{
+        margin-left:12px;
+      }
+    }
   }
 }

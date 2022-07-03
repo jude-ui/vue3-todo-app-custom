@@ -9,16 +9,33 @@
         :value="title"
         @input="title = $event.target.value"
         @keyup="$event.key === 'Enter' ? updateTodo() : 1" />
-      <button 
-        class="btn btn_primary"
-        @click="updateTodo">
-        OK
-      </button>
-      <button
-        class="btn btn_secondary"
-        @click="offEditMode">
-        Cancel
-      </button>
+      <div class="group_btn_m">
+        <button
+          type="button"
+          @click="updateTodo"
+          class="material-icons-outlined"
+          aria-label="OK">
+          check_circle
+        </button>
+        <button
+          type="button"
+          @click="offEditMode"
+          class="material-icons-outlined">
+          cancel
+        </button>
+      </div>
+      <div class="group_btn_pc">
+        <button 
+          class="btn btn_primary"
+          @click="updateTodo">
+          OK
+        </button>
+        <button
+          class="btn btn_secondary"
+          @click="offEditMode">
+          Cancel
+        </button>
+      </div>
     </div>
     <div
       v-else
@@ -53,16 +70,32 @@
           {{ todo.title }}
         </div>
       </div>
-      <button
-        class="btn btn_secondary"
-        @click="onEditMode">
-        Edit
-      </button>
-      <button
-        class="btn btn_danger"
-        @click="onDeleteTodoLayer">
-        Delete
-      </button>
+      <div class="group_btn_m">
+        <button
+          type="button"
+          @click="onEditMode"
+          class="material-icons-outlined">
+          edit
+        </button>
+        <button
+          type="button"
+          @click="onDeleteTodoLayer"
+          class="material-icons-outlined">
+          delete
+        </button>
+      </div>
+      <div class="group_btn_pc">
+        <button
+          class="btn btn_secondary"
+          @click="onEditMode">
+          Edit
+        </button>
+        <button
+          class="btn btn_danger"
+          @click="onDeleteTodoLayer">
+          Delete
+        </button>
+      </div>
     </div>
 
     <CommonLayer
