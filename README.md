@@ -1,4 +1,4 @@
-# Vue3 템플릿 with Webpack
+# Vue3 Todo App Custom
 
 ## Installation
 
@@ -83,3 +83,13 @@ __shortid__: 고유한 id값을 랜덤으로 생성해주는 패키지<br>
   }
 }
 ```
+
+## 작업 과정
+
+__[svelte 코드](https://github.com/jude-ui/svelte-todo-app-custom)를 뷰 코드로 변경하는 작업 진행__
+
+- svelte 프로젝트에선 최신순, 과거순 정렬 버튼의 텍스트를 derived(getters)를 사용했지만 vue에서는 {{ }} 안에 삼항연산자로 다이렉트로 나오게 작성해봤다.
+- vue는 svelte와 달리 store의 상태값을 변경하려면 스토어의 mutations을 호출하여 변경해야 해서 상태 자체를 바꾸는 updateState 함수와, 상태 상세 값을 변경할 수 있는 updateTodoItem 함수를 공통으로 mutations에 만들어야 했다.
+- 목록을 뒤집는 reverse, unshift, push 등은 배열 자체를 변경하는 메소드라 mutations에 변경하는 함수를 별도로 생성해서 사용했다.
+- svelte에서는 state인 배열 자체를 변경하고나서 할당을 안해주면 반응성이 생기지 않아서 $todos = $todos 라는 다소 이상해보이는 코드를 작성했던거에 비해 뷰에선 이런 코드는 없어도 괜찮다.
+- todo를 수정할 때 title, time, isDone 과 같은 정보를 별도로 업데이트 처리해주기 위해서, 고유 id값을 통해 가려낸 객체에 정보를 업데이트 시켜주도록 mutations에 updateTodoItem 작성

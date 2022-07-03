@@ -1,5 +1,5 @@
 {
-  "name": "vue3-webpack-template",
+  "name": "vue3-todo-app-custom",
   "version": "1.0.0",
   "description": "",
   "__browserslist": "이 프로젝트가 지원하는 대상 브라우저를 지정 for Autoprefixer!",
