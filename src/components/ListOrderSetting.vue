@@ -6,7 +6,7 @@
     <a
       href="#none"
       class="link_opt"
-      @click="isOptOpen = !isOptOpen">
+      @click.prevent="isOptOpen = !isOptOpen">
       {{ isListRecent ? '최신순' : '과거순' }}
       <span
         class="material-icons-outlined ico_arr"
