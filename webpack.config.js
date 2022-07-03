@@ -77,7 +77,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'static' }
+        { from: 'static', to: 'static' }
       ]
     }),
     new VueLoaderPlugin()
