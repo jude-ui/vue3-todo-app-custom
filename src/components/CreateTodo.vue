@@ -1,6 +1,5 @@
 <template>
   <div class="create_todo">
-    {{ title }}
     <input
       type="text"
       class="form_ctrl"
