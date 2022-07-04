@@ -62,6 +62,9 @@ __babel-eslint__: ES6 이상의 코드(Babel)를 분석 __(+ESLint)__<br>
 __moment__: 다양한 양식의 시간 데이터 출력을 도와주는 패키지<br>
 __shortid__: 고유한 id값을 랜덤으로 생성해주는 패키지<br>
 
+__sortablejs__: 목록의 위치를 변경시켜주는 라이브러리<br>
+__lodash__: 객체를 다양하게 조작하게 해주는 헬퍼 라이브러리<br>
+
 ## 주의사항!
 
 - `webpack-dev-server`와 `webpack-cli`는 메이저 버전을 일치 시켜야 함!<br>

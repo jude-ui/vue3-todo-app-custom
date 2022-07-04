@@ -12,7 +12,7 @@
         type="button" 
         class="btn btn_danger btn_init"
         @click="checkInit">
-        목록 초기화 <span
+        전체 삭제<span
           class="material-icons-outlined ico_delete"
           aria-hidden="true">delete</span>
       </button>
@@ -25,7 +25,9 @@
     </div>
     <!-- // info_setting -->
     
-    <ul class="list_todo">
+    <ul
+      class="list_todo"
+      ref="listTodos">
       <Todo
         v-for="todo in todos"
         :key="todo.id"
@@ -40,6 +42,7 @@ import CreateTodo from '~/components/CreateTodo'
 import ListOrderSetting from '~/components/ListOrderSetting'
 import Todo from '~/components/Todo'
 import CommonLayer from '~/components/CommonLayer'
+import Sortable from 'sortablejs'
 
 export default {
   components: {
@@ -50,7 +53,8 @@ export default {
   },
   data() {
     return {
-      isLayerOn: false
+      isLayerOn: false,
+      sortableLists: null
     }
   },
   computed: {
@@ -64,14 +68,13 @@ export default {
       'updateState',
       'reverseTodos',
       'saveStorage',
-      'initStorage'
+      'initStorage',
+      'todosOrder'
     ]),
     checkInit() {
-      console.log('checkInit');
       this.isLayerOn = true
     },
     initTodos() {
-      console.log('initTodos');
       this.updateState({ todos: [] })
       this.initStorage()
       this.isLayerOn = false
@@ -96,6 +99,22 @@ export default {
       this.reverseTodos() // 과거순인 todos 목록을 최신순으로 변경
       this.saveStorage() // 로컬 스토리지도 최신순으로 반영
     }
+  },
+  mounted() {
+    const self = this
+    this.sortableLists = new Sortable(this.$refs.listTodos, {
+      group: 'Todo Lists',
+      handle: '.list_todo .btn_move',
+      delay: 50,
+      animation: 0,
+      forceFallback: true,
+      onEnd: function (e) {
+        self.todosOrder({
+          oldIndex: e.oldIndex,
+          newIndex: e.newIndex
+        })
+      }
+    })
   }
 }
 </script>

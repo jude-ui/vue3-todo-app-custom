@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import _cloneDeep from 'lodash/cloneDeep'
 
 export default createStore({
   state: () => ({
@@ -35,12 +36,20 @@ export default createStore({
       state.todos.reverse()
     },
     saveStorage(state) {
+      // console.log('save')
       localStorage.setItem('todos', JSON.stringify(state.todos))
       localStorage.setItem('isListRecent', JSON.stringify(state.isListRecent))
     },
     initStorage() {
       localStorage.setItem('todos', JSON.stringify([]))
       localStorage.setItem('isListRecent', JSON.stringify(true))
+    },
+    todosOrder(state, payload) {
+      const { oldIndex, newIndex } = payload
+      const clone = _cloneDeep(state.todos[oldIndex])
+      state.todos.splice(oldIndex, 1)
+      state.todos.splice(newIndex, 0, clone)
+      this.commit('saveStorage')
     }
   }
 })

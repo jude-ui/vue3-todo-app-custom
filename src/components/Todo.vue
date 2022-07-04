@@ -43,6 +43,12 @@
       <div
         class="txt_info"
         :class="{item_done: todo.isDone}">
+        <button
+          type="button"
+          class="material-icons-outlined btn_move"
+          aria-label="순서 이동 버튼">
+          dehaze
+        </button>
         <div class="group_check">
           <input
             title="할일 완료"

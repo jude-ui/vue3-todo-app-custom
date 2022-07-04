@@ -50,14 +50,16 @@
 .list_todo{
   padding-top:10px;
   li + li{
-    margin-top:10px;
-    padding-top:10px;
     border-top:1px solid #ececec;
+    &.sortable-drag{
+      border:0;
+    }
   }
 }
 [class*=mode_]{
   display:flex;
   align-items:center;
+  height:42px;
   padding:10px;
   &:hover{
     background-color:#f8f8f8;
@@ -124,9 +126,15 @@
     line-height:16px;
     color:#bcbcbc;
   }
+  .btn_move{
+    margin-left:-8px;
+    padding:8px;
+    font-size:20px;
+    color:#313131
+  }
   .group_check{
+    flex-shrink:0;
     position:relative;
-    margin-left:-10px;
     .inp_check{
       position:absolute;top:0;left:0;width:100%;height:100%;margin:0;padding:0;appearance:none;-webkit-appearance:none;cursor:pointer;
       &:checked + .lab_check{
@@ -140,6 +148,7 @@
     display:flex;align-items:center;margin:-10px 0;padding:18px 10px;user-select:none;cursor:pointer;
     .ico_check{
       font-size:26px;
+      color:#313131;
     }
   }
   &.item_done{
@@ -211,7 +220,6 @@
 /* setting */
 .info_setting{
   display:flex;
-  justify-content:space-between;
   margin-top:20px;
   .btn_init{
     display:flex;
@@ -224,9 +232,10 @@
   }
 }
 .group_opt{
+  flex:1;
   display:flex;
+  justify-content: flex-end;
   position:relative;
-  padding:6px 0 5px;
   text-decoration:none;
   .ico_arr{
     margin-top:-4px;
@@ -234,6 +243,7 @@
   .link_opt{
     display:flex;
     align-items:center;
+    padding:6px 0 5px;
     font-size:16px;
     line-height:30px;
     color:#111;
@@ -271,6 +281,19 @@
       }
     }
   }
+}
+.sortable-ghost, .sortable-ghost [class*="mode_"]:hover{
+  background-color:#d0d0d0;
+}
+.sortable-ghost{
+  [class*="mode_"]:hover{
+    .txt_more {
+      display:none;
+    }
+  }
+}  
+.sortable-drag{
+  background-color:#ececec
 }
 
 @media
