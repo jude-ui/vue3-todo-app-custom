@@ -160,6 +160,7 @@
         // 빈 문자열로 수정할 경우 목록에서 삭제
         if (!this.title.trim()) {
           this.deleteTodoItem(this.todo)
+          this.saveStorage() // 로컬 스토리지 반영
           return
         }
         
