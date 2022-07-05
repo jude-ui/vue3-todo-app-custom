@@ -12,21 +12,32 @@
         type="button" 
         class="btn btn_danger btn_init"
         @click="checkInit">
-        전체 삭제<span
+        전체 삭제
+        <span
           class="material-icons-outlined ico_delete"
           aria-hidden="true">delete</span>
       </button>
       <CommonLayer
         v-if="isLayerOn"
-        tit-layer="Todo 목록을 모두 초기화 시키겠습니까?"
+        tit-layer="Todo 목록을 모두 삭제하겠습니까?"
         :btn-fn1="initTodos"
         :btn-fn2="cancelInit" />
+      <button
+        @click="orderEdit"
+        type="button"
+        class="btn btn_danger btn_order_change">
+        순서 변경
+        <span
+          class="material-icons-outlined ico_change"
+          aria-hidden="true">swap_vert</span>
+      </button>
       <ListOrderSetting />
     </div>
     <!-- // info_setting -->
     
     <ul
       class="list_todo"
+      :class="{ active: todos.length, 'edit_on': isOrderEdit}"
       ref="listTodos">
       <Todo
         v-for="todo in todos"
@@ -54,7 +65,8 @@ export default {
   data() {
     return {
       isLayerOn: false,
-      sortableLists: null
+      sortableLists: null,
+      isOrderEdit: false,
     }
   },
   computed: {
@@ -78,10 +90,13 @@ export default {
       this.updateState({ todos: [] })
       this.initStorage()
       this.isLayerOn = false
+      this.isOrderEdit = false // todo 모두 삭제시 순서 변경 모드 off
     },
     cancelInit() {
-      console.log('cancelInit');
       this.isLayerOn = false
+    },
+    orderEdit() {
+      this.isOrderEdit = !this.isOrderEdit
     }
   },
   created() {
