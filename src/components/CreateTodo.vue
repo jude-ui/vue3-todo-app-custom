@@ -32,8 +32,8 @@
     },
     methods: {
       ...mapMutations([
-        'unshiftTodos',
-        'pushTodos',
+        'deleteTodos',
+        'addTodos',
         'saveStorage',
       ]),
       createTodo() {
@@ -45,7 +45,7 @@
           isDone: false,
           time: moment().format('YYYY.MM.DD a h:mm:ss')
         }
-        this.isListRecent ? this.unshiftTodos(todo) : this.pushTodos(todo)
+        this.isListRecent ? this.deleteTodos(todo) : this.addTodos(todo)
         this.saveStorage()  // 로컬 스토리지 반영
 
         this.title = ''

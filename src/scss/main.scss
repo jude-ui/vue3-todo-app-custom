@@ -126,7 +126,7 @@
   position: relative;
   min-width: 0;
   margin-left: -10px;
-  transition: all .3s;
+  transition: padding .3s;
   .todo_txt{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -158,16 +158,16 @@
       position: absolute;top: 0;left: 0;width: 100%;height: 100%;margin: 0;padding: 0;appearance: none;-webkit-appearance: none;cursor: pointer;
       &:checked + .lab_check{
         .ico_check{
-          color: mediumseagreen;
+          color: #59cd61;
         }
       }
     }
-  }
-  .lab_check{
-    display: flex;align-items: center;margin: -10px 0;padding: 18px 10px;user-select: none;cursor: pointer;
-    .ico_check{
-      font-size: 26px;
-      color: #313131;
+    .lab_check{
+      display: flex;align-items: center;margin: -10px 0;padding: 18px 10px;user-select: none;cursor: pointer;
+      .ico_check{
+        font-size: 26px;
+        color: #e7e7e7;
+      }
     }
   }
   &.item_done{
@@ -242,12 +242,12 @@
 .info_setting{
   display: flex;
   margin-top: 20px;
-  .btn_init, .btn_order_change{
+  & > .btn{
     display: flex;
     align-items: center;
     padding: 8px 7px 6px 10px;
     font-size: 14px;
-    .ico_delete, .ico_change{
+    [class*="material-icons"]{
       margin: -1px 0 0 5px;
     }
   }
@@ -315,6 +315,23 @@
 }  
 .sortable-drag{
   background-color: #ececec
+}
+
+@media
+only screen and (max-width: 440px){
+  .info_setting {
+    & > .btn{
+      font-size: 11px;
+      & + .btn{
+        margin-left: 5px;
+      }
+    }
+    .group_opt{
+      position: fixed;
+      top: 15px;
+      right: 15px;
+    }
+  }
 }
 
 @media

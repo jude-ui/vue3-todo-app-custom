@@ -11,26 +11,42 @@
       <button 
         type="button" 
         class="btn btn_danger btn_init"
-        @click="checkInit">
+        @click="checkDeleteAllTodo">
         전체 삭제
         <span
           class="material-icons-outlined ico_delete"
           aria-hidden="true">delete</span>
       </button>
       <CommonLayer
-        v-if="isLayerOn"
+        v-if="isDeleteAllLayer"
         tit-layer="Todo 목록을 모두 삭제하겠습니까?"
-        :btn-fn1="initTodos"
-        :btn-fn2="cancelInit" />
+        :btn-fn1="deleteAllTodo"
+        :btn-fn2="cancelDeleteAllTodo" />
       <button
         @click="orderEdit"
         type="button"
-        class="btn btn_danger btn_order_change">
+        class="btn btn_primary btn_order_change">
         순서 변경
         <span
           class="material-icons-outlined ico_change"
           aria-hidden="true">swap_vert</span>
       </button>
+      <button
+        @click="checkDeleteSelectedTodo"
+        type="button"
+        class="btn btn_primary btn_order_change">
+        선택 삭제
+        <span
+          class="material-icons-outlined ico_delete"
+          aria-hidden="true">delete</span>
+      </button>
+
+      <CommonLayer
+        v-if="isDeleteSelectedLayer"
+        tit-layer="선택한 Todo 목록을 모두 삭제하겠습니까?"
+        :btn-fn1="deleteSelectedTodo"
+        :btn-fn2="cancelDeleteSelectedTodo" />
+
       <ListOrderSetting />
     </div>
     <!-- // info_setting -->
@@ -64,15 +80,17 @@ export default {
   },
   data() {
     return {
-      isLayerOn: false,
+      isDeleteAllLayer: false,
       sortableLists: null,
       isOrderEdit: false,
+      isDeleteSelectedLayer: false
     }
   },
   computed: {
     ...mapState([
       'todos',
-      'isListRecent'
+      'isListRecent',
+      'selectedTodoItem'
     ])
   },
   methods: {
@@ -83,21 +101,45 @@ export default {
       'initStorage',
       'todosOrder'
     ]),
-    checkInit() {
-      this.isLayerOn = true
+    // 모두 삭제 확인 팝업 open
+    checkDeleteAllTodo() {
+      this.isDeleteAllLayer = true
     },
-    initTodos() {
+    // 모두 삭제 확인 팝업 닫기
+    cancelDeleteAllTodo() {
+      this.isDeleteAllLayer = false
+    },
+    // 모두 삭제 기능
+    deleteAllTodo() {
       this.updateState({ todos: [] })
       this.initStorage()
-      this.isLayerOn = false
+      this.isDeleteAllLayer = false
       this.isOrderEdit = false // todo 모두 삭제시 순서 변경 모드 off
     },
-    cancelInit() {
-      this.isLayerOn = false
-    },
+    // 순서 변경 모드 on/off
     orderEdit() {
       this.isOrderEdit = !this.isOrderEdit
-    }
+    },
+    // 선택 삭제 확인 팝업 open
+    checkDeleteSelectedTodo() {
+      if (!this.selectedTodoItem.length) return // 선택된 todo 없을 경우 레이어 작동 X
+      this.isDeleteSelectedLayer = true
+    },
+    // 선택 삭제 확인 팝업 닫기
+    cancelDeleteSelectedTodo() {
+      this.isDeleteSelectedLayer = false
+    },
+    // 선택 삭제 기능
+    deleteSelectedTodo() {
+      this.updateState({
+        todos: this.todos.filter(t => {
+          return !this.selectedTodoItem.includes(t.id)
+        })
+      })
+      this.saveStorage() // 로컬 스토리지 반영
+      this.updateState({selectedTodoItem: []}) // 선택된 todo 정보의 배열 초기화
+      this.isDeleteSelectedLayer = false
+    },
   },
   created() {
     // 새로고침시 로컬 스토리지 todos를 화면에 반영
@@ -116,6 +158,7 @@ export default {
     }
   },
   mounted() {
+    // 순서 변경 기능
     const self = this
     this.sortableLists = new Sortable(this.$refs.listTodos, {
       group: 'Todo Lists',

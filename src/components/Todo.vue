@@ -51,6 +51,25 @@
         </button>
         <div class="group_check">
           <input
+            title="할일 선택"
+            :id="checkId"
+            type="checkbox"
+            v-model="checked"
+            @click="selectTodo"
+            class="inp_check" />
+          <label
+            class="lab_check"
+            :for="checkId">
+            <span class="screen_out">선택</span>
+            <div
+              class="material-icons-outlined ico_check"
+              aria-hidden="true">
+              {{ txtCheckBox }}
+            </div>
+          </label>
+        </div>
+        <div class="group_check">
+          <input
             title="할일 완료"
             :id="todo.id"
             type="checkbox"
@@ -62,9 +81,9 @@
             :for="todo.id">
             <span class="screen_out">완료</span>
             <div
-              class="material-icons-outlined ico_check"
+              class="material-icons ico_check"
               aria-hidden="true">
-              {{ isIcoTxtDone }}
+              done
             </div>
           </label>
         </div>
@@ -114,7 +133,7 @@
 
 <script>
   import moment from 'moment'
-  import { mapMutations } from 'vuex'
+  import { mapMutations, mapState } from 'vuex'
   import CommonLayer from '~/components/CommonLayer'
 
   export default {
@@ -126,6 +145,8 @@
         isEditMode: false,
         title: '',
         isLayerOn: false,
+        checked: false,
+        checkId: 'select_'+ this.todo.id
       }
     },
     props: {
@@ -135,17 +156,32 @@
       }
     },
     computed: {
-      isIcoTxtDone() {
-        return this.todo.isDone ? 'check_box' : 'check_box_outline_blank'
+      ...mapState([
+        'selectedTodoItem'
+      ]),
+      txtCheckBox() {
+        return this.checked ? 'check_box' : 'check_box_outline_blank'
       }
     },
     methods: {
       ...mapMutations([
-        'updateState',
         'saveStorage',
+        'updateState',
         'updateTodoItem',
-        'deleteTodoItem'
+        'deleteTodoItem',
+        'addSelectedTodoItem'
       ]),
+      selectTodo() {
+        if (this.checked) {
+          console.log('체크 해제됨');
+          this.updateState({
+            selectedTodoItem: this.selectedTodoItem.filter(t => t !== this.todo.id)
+          })
+        } else {
+          console.log('체크됨');
+          this.addSelectedTodoItem(this.todo.id)
+        }
+      },
       onEditMode() {
         // input에 todo 데이터 반영하여 수정 상태 on
         this.title = this.todo.title

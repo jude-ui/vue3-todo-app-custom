@@ -4,7 +4,8 @@ import _cloneDeep from 'lodash/cloneDeep'
 export default createStore({
   state: () => ({
     todos: [],
-    isListRecent: true
+    isListRecent: true,
+    selectedTodoItem: []
   }),
   mutations: {
     updateState(state, payload) {
@@ -23,13 +24,16 @@ export default createStore({
         }
       })
     },
+    addSelectedTodoItem(state, payload) {
+      state.selectedTodoItem.push(payload)
+    },
     deleteTodoItem(state, { id }) {
       state.todos = state.todos.filter(t => t.id !== id)
     },
-    unshiftTodos(state, payload) {
+    deleteTodos(state, payload) {
       state.todos.unshift(payload)
     },
-    pushTodos(state, payload) {
+    addTodos(state, payload) {
       state.todos.push(payload)
     },
     reverseTodos(state) {
