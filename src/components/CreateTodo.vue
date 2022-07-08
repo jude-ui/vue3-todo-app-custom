@@ -4,7 +4,7 @@
       type="text"
       class="form_ctrl"
       v-model="title"
-      @keyup="$event.key === 'Enter' ? createTodo() : 1" />
+      @keyup.enter="createTodo()" />
     <button
       class="btn btn_primary"
       @click="createTodo">

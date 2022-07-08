@@ -1,5 +1,7 @@
 <template>
-  <div class="dimmed_layer">
+  <div
+    class="dimmed_layer"
+    @click.self="btnFn2">
     <div class="inner_dimmed_layer">
       <div class="layer_body">
         <strong>{{ titLayer }}</strong>

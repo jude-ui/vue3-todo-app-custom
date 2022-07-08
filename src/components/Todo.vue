@@ -8,7 +8,7 @@
         type="text"
         :value="title"
         @input="title = $event.target.value"
-        @keyup="$event.key === 'Enter' ? updateTodo() : 1" />
+        @keyup.enter="updateTodo()" />
       <div class="group_btn_m">
         <button
           type="button"
