@@ -98,5 +98,6 @@ __[svelte 코드](https://github.com/jude-ui/svelte-todo-app-custom)를 뷰 코�
 - 목록을 뒤집는 reverse, unshift, push 등은 배열 자체를 변경하는 메소드라 mutations에 변경하는 함수를 별도로 생성해서 사용했다.
 - svelte에서는 state인 배열 자체를 변경하고나서 할당을 안해주면 반응성이 생기지 않아서 $todos = $todos 라는 다소 이상해보이는 코드를 작성했던거에 비해 뷰에선 이런 코드는 없어도 괜찮다.
 - todo를 수정할 때 title, time, isDone 과 같은 정보를 별도로 업데이트 처리해주기 위해서, 고유 id값을 통해 가려낸 객체에 정보를 업데이트 시켜주도록 mutations에 updateTodoItem 작성
-- 공통 딤드 레이어의 버튼 이벤트들을 props로 함수 자체를 넘겨서 사용했었는데, emit 기능으로 리팩토링
+- 공통 딤드 레이어의 버튼 이벤트들을 props로 함수 자체를 넘겨서 사용했었는데, emit 기능으로 수정
   - svelte 버전은 createEventDispatcher를 가져와서 부모, 자식 컴포넌트의 각 함수에서 각각 실행을 해줘야 하고 코드가 너무 늘어나는거 같아서 그냥 함수 전달로 남겨둠
+- 공통 딤드 레이어의 제목을 props가 아닌 slot으로 수정

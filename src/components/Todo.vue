@@ -124,9 +124,10 @@
 
     <CommonLayer
       v-if="isLayerOn"
-      tit-layer="삭제하시겠습니까?"
       @btnFn1="deleteTodo"
-      @btnFn2="cancelDelete" />
+      @btnFn2="cancelDelete">
+      삭제하시겠습니까?
+    </CommonLayer>
   </li>
 </template>
 

@@ -19,9 +19,10 @@
       </button>
       <CommonLayer
         v-if="isDeleteAllLayer"
-        tit-layer="Todo 목록을 모두 삭제하겠습니까?"
         @btnFn1="deleteAllTodo"
-        @btnFn2="cancelDeleteAllTodo" />
+        @btnFn2="cancelDeleteAllTodo">
+        Todo 목록을 모두 삭제하겠습니까?
+      </CommonLayer>
       <button
         @click="orderEdit"
         type="button"
@@ -43,9 +44,10 @@
 
       <CommonLayer
         v-if="isDeleteSelectedLayer"
-        tit-layer="선택한 Todo 목록을 모두 삭제하겠습니까?"
         @btnFn1="deleteSelectedTodo"
-        @btnFn2="cancelDeleteSelectedTodo" />
+        @btnFn2="cancelDeleteSelectedTodo">
+        선택한 Todo 목록을 모두 삭제하겠습니까?
+      </CommonLayer>
       <ListOrderSetting />
     </div>
     <!-- // info_setting -->

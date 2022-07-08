@@ -4,7 +4,9 @@
     @click.self="$emit('btnFn2')">
     <div class="inner_dimmed_layer">
       <div class="layer_body">
-        <strong>{{ titLayer }}</strong>
+        <strong>
+          <slot></slot>
+        </strong>
       </div>
       <div class="layer_foot">
         <button
@@ -37,10 +39,6 @@
         type: String,
         default: '취소'
       },
-      titLayer: {
-        type: String,
-        default: '레이어 제목'
-      }
     }
   }
 </script>
