@@ -3,7 +3,7 @@
     <input
       type="text"
       class="form_ctrl"
-      v-model="title"
+      v-model.trim="title"
       @keyup.enter="createTodo()" />
     <button
       class="btn btn_primary"
@@ -37,11 +37,11 @@
         'saveStorage',
       ]),
       createTodo() {
-        if (!this.title || !this.title.trim()) return
+        if (!this.title) return
 
         const todo = {
           id: shortid.generate(),
-          title: this.title.trim(),
+          title: this.title,
           isDone: false,
           time: moment().format('YYYY.MM.DD a h:mm:ss')
         }

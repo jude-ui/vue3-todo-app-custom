@@ -6,8 +6,7 @@
       <input
         class="form_ctrl"
         type="text"
-        :value="title"
-        @input="title = $event.target.value"
+        v-model.trim="title"
         @keyup.enter="updateTodo()" />
       <div class="group_btn_m">
         <button
@@ -194,7 +193,7 @@
       // update
       updateTodo() {
         // 빈 문자열로 수정할 경우 목록에서 삭제
-        if (!this.title.trim()) {
+        if (!this.title) {
           this.deleteTodoItem(this.todo)
           this.saveStorage() // 로컬 스토리지 반영
           return
@@ -203,14 +202,14 @@
         this.updateTime() // 시간 업데이트
         this.updateTodoItem({ // store 반영
           id: this.todo.id,
-          title: this.title.trim()
+          title: this.title
         })
         this.saveStorage() // 로컬 스토리지 반영
         this.offEditMode()
       },
       updateTime() {
         // 수정 시각 업데이트 및 (수정됨) 문구 추가
-        if (this.todo.title !== this.title.trim()) { // 스토어의 title과 입력한 title.trim()이 다르다면
+        if (this.todo.title !== this.title) { // 스토어의 title과 입력한 title이 다르다면
           this.updateTodoItem({
             id: this.todo.id,
             time: moment().format('YYYY.MM.DD a h:mm:ss') + ' (수정됨)'
