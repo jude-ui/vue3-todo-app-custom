@@ -125,8 +125,8 @@
     <CommonLayer
       v-if="isLayerOn"
       tit-layer="삭제하시겠습니까?"
-      :btn-fn1="deleteTodo"
-      :btn-fn2="cancelDelete" />
+      @btnFn1="deleteTodo"
+      @btnFn2="cancelDelete" />
   </li>
 </template>
 
@@ -172,12 +172,12 @@
       ]),
       selectTodo() {
         if (this.checked) {
-          console.log('체크 해제됨');
+          // console.log('체크 해제됨');
           this.updateState({
             selectedTodoItem: this.selectedTodoItem.filter(t => t !== this.todo.id)
           })
         } else {
-          console.log('체크됨');
+          // console.log('체크됨');
           this.addSelectedTodoItem(this.todo.id)
         }
       },
