@@ -6,7 +6,7 @@
 
 ```bash
 # Default.
-$ npx degit jude-ui/vue3-todo-app <Project Name>
+$ npx degit jude-ui/vue3-todo-app-custom <Project Name>
 
 # Start!
 $ cd <Project Name>
